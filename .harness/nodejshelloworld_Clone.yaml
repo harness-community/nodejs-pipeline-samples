@@ -1,0 +1,89 @@
+---
+pipeline:
+  projectIdentifier: "DhrubaCI"
+  orgIdentifier: "default"
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: "nodejshelloworld"
+        build: "<+input>"
+  stages:
+  - stage:
+      name: "build test and run"
+      identifier: "build_test_and_run"
+      description: ""
+      type: "CI"
+      spec:
+        cloneCodebase: true
+        infrastructure:
+          type: "KubernetesDirect"
+          spec:
+            connectorRef: "DhrubaDemoCI2"
+            namespace: "dhruba-demo-ci"
+            automountServiceAccountToken: true
+            nodeSelector: {}
+            os: "Linux"
+        execution:
+          steps:
+          - step:
+              type: "Run"
+              name: "install node modules"
+              identifier: "install_node_modules"
+              spec:
+                connectorRef: "account.harnessImage"
+                image: "node:14"
+                shell: "Sh"
+                command: "npm install\n"
+          - step:
+              type: "Run"
+              name: "create image"
+              identifier: "create_image"
+              spec:
+                connectorRef: "account.harnessImage"
+                image: "node:14"
+                shell: "Sh"
+                command: "touch nodejsdockerfile\ncat > nodejsdockerfile <<- EOM\n\
+                  FROM node:14\nWORKDIR /nodejshelloworld\nCOPY package*.json index.js\
+                  \ ./\nRUN npm install\nEXPOSE 8080\nCMD [\"node\", \"index.js\"\
+                  ]\nEOM\ncat nodejsdockerfile"
+          - step:
+              type: "BuildAndPushDockerRegistry"
+              name: "build and push an image to docker"
+              identifier: "build_and_push_an_image_to_docker"
+              spec:
+                connectorRef: "<+input>"
+                repo: "<+input>"
+                tags:
+                - "latest"
+  - stage:
+      name: "integration test"
+      identifier: "integration_test"
+      type: "CI"
+      spec:
+        cloneCodebase: false
+        infrastructure:
+          useFromStage: "build_test_and_run"
+        execution:
+          steps:
+          - step:
+              type: "Background"
+              name: "nodejs server"
+              identifier: "nodejs_server"
+              spec:
+                connectorRef: "<+input>"
+                image: "<+input>"
+                shell: "Sh"
+                command: "cd /nodejshelloworld\nnode index.js"
+          - step:
+              type: "Run"
+              name: "test connection to server"
+              identifier: "test_connection_to_server"
+              spec:
+                connectorRef: "DhrubajyotiDocker"
+                image: "curlimages/curl:7.73.0"
+                shell: "Sh"
+                command: "sleep 10\ncurl --request GET \\\n    --url http://localhost:8080\n\
+                  \necho \"test sucessfull\""
+  identifier: "nodejshelloworld_Clone"
+  name: "nodejshelloworld - Clone"

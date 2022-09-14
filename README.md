@@ -8,4 +8,4 @@ TODO:
 - Explain a bit on what the sample app does
 - Other useful links
 - License info
-- Harness Community landing page link
+- [Harness Community - Communication Guide](https://github.com/harness-community/overview/blob/main/community_communication_guide.rst)

@@ -80,10 +80,10 @@ pipeline:
               name: "test connection to server"
               identifier: "test_connection_to_server"
               spec:
-                connectorRef: "DhrubajyotiDocker"
+                connectorRef: "<+input>"
                 image: "curlimages/curl:7.73.0"
                 shell: "Sh"
                 command: "sleep 10\ncurl --request GET \\\n    --url http://localhost:8080\n\
                   \necho \"test sucessfull\""
-  identifier: "nodejshelloworld_Clone"
-  name: "nodejshelloworld - Clone"
+  identifier: "nodejs-ci-quickstart"
+  name: "nodejs-ci-quickstart"

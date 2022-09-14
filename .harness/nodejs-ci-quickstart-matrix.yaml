@@ -1,0 +1,114 @@
+pipeline:
+  name: ci-quickstart-nodejs-matrix
+  identifier: ciquickstartnodejs
+  projectIdentifier: DhrubaCI
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: nodejshelloworld
+        build: <+input>
+  stages:
+    - stage:
+        name: build test and run
+        identifier: build_test_and_run
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: DhrubaDemoCI2
+              namespace: dhruba-demo-ci
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: install node modules
+                  identifier: install_node_modules
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:14
+                    shell: Sh
+                    command: npm install
+              - step:
+                  type: Run
+                  name: create image
+                  identifier: create_image
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:14
+                    shell: Sh
+                    command: |-
+                      touch nodejsdockerfile
+                      cat > nodejsdockerfile <<- EOM
+                      FROM node:14
+                      WORKDIR /nodejshelloworld
+                      COPY package*.json index.js ./
+                      RUN npm install
+                      EXPOSE 8080
+                      CMD ["node", "index.js"]
+                      EOM
+                      cat nodejsdockerfile
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: build and push an image to docker
+                  identifier: build_and_push_an_image_to_docker
+                  spec:
+                    connectorRef: <+input>
+                    repo: <+input>
+                    tags:
+                      - latest
+        strategy:
+          repeat:
+            items:
+              - 18-alpine3.15
+              - current-alpine3.15
+          maxConcurrency: 2
+    - stage:
+        name: integration test
+        identifier: integration_test
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            useFromStage: build_test_and_run
+          execution:
+            steps:
+              - step:
+                  type: Background
+                  name: nodejs server
+                  identifier: nodejs_server
+                  spec:
+                    connectorRef: <+input>
+                    image: <+input>
+                    shell: Sh
+                    command: |-
+                      cd /nodejshelloworld
+                      node index.js
+              - step:
+                  type: Run
+                  name: test connection to server
+                  identifier: test_connection_to_server
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: curlimages/curl:7.73.0
+                    shell: Sh
+                    command: |-
+                      sleep 10
+                      curl --request GET \
+                          --url http://localhost:8080
+
+                      echo "test sucessfull"
+        strategy:
+          repeat:
+            items:
+              - 18-alpine3.15
+              - current-alpine3.15
+          maxConcurrency: 2

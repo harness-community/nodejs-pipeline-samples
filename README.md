@@ -57,3 +57,8 @@ You can use publicly-available code, images, and your Github and Docker Hub acco
 - Create Integration Stage
 - Execute the Pipeline
 
+## Licensing
+
+MIT License
+
+See [COPYING](https://spdx.org/licenses/MIT.html) to see the full text.

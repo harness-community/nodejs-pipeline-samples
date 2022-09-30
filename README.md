@@ -56,8 +56,15 @@ You can use publicly-available code, images, and your Github and Docker Hub acco
 - [Build & Push Image to Docker](docs/DockerPush.md)
 - [Create Integration Stage and Run the Pipeline](docs/Integration.md)
 
-## Licensing
+## Code of Conduct
 
-MIT License
+All users and contributors of the Harness community should adhere to the following [Code of Conduct](https://github.com/harness/community/blob/main/CODE_OF_CONDUCT.md)!
 
-See [COPYING](https://spdx.org/licenses/MIT.html) to see the full text.
+## Communication
+
+Refer [Harness Community Communications Guide](https://github.com/harness-community/overview/blob/main/community_communication_guide.rst) to interact with the wider community users/contributors, join slack workgroups to get help/help other users and create topics in [community.harness.io](https://community.harness.io)
+
+### License
+
+MIT License. See [COPYING](LICENSE) for more information.
+

@@ -51,11 +51,10 @@ You can use publicly-available code, images, and your Github and Docker Hub acco
 
 ## Docs
 
-- Pipeline Creation & Build Set-up
-- Configuring the infrastructure & setting up Build & Run Unit Test stage
-- Build & Push Image to Docker
-- Create Integration Stage
-- Execute the Pipeline
+- [Pipeline Creation & Build Set-up](docs/CreatePipeline.md)
+- [Configuring the infrastructure & setting up Build & Run Unit Test stage](docs/build.md)
+- [Build & Push Image to Docker](docs/DockerPush.md)
+- [Create Integration Stage and Run the Pipeline](docs/Integeration.md)
 
 ## Licensing
 

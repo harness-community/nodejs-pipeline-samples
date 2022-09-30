@@ -23,4 +23,4 @@ In this tutorial you will learn how you can seamlessly get started with Harness 
 
 To know more about Pipelines [check out the docs here](https://github.com/harness-community/nodejs-pipeline-samples/docs) Next, we are going to add Stages and steps to our Pipeline and build our Nodejs sample server.
 
-**[Click Here to move to the next step (Build step)](build.md)**
+**[Click Here to move to the next step (Build step)](createbuild.md)**

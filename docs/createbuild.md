@@ -62,7 +62,7 @@ Next Step(Execution)
          - Username - Docker hub username 
          - Secret Token - [Check out how to create docker PAT](dockerpat.md)
        - Connect to Provider 
-         - Choose connect through harness delegate -> Select Harness delegate you created 
+         - Choose connect through Harness Delegate -> Select Harness delegate you created 
          - It will take sometime to verify your credentials.
   - Image: `node:14`
   - Shell: `Sh`

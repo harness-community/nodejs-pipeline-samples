@@ -1,10 +1,8 @@
 # Nodejs Sample Pipelines in Harness
-
 ![Harness-BG-Image](https://raw.githubusercontent.com/harness-community/cd-pipeline-sample/main/Images/harness_cover_image.png)
 
-
 Introduction
-========================
+============
 This repository is a home for snippets of YAML code and a sample hello world server of scripting for the Harness CI Community.
 
 ## Layout
@@ -42,10 +40,10 @@ You can use publicly-available code, images, and your Github and Docker Hub acco
 
 ## Docs
 
-- [Pipeline Creation & Build Set-up](docs/CreatePipeline.md)
-- [Configuring the infrastructure & setting up Build & Run Unit Test stage](docs/build.md)
-- [Build & Push Image to Docker](docs/DockerPush.md)
-- [Create Integration Stage and Run the Pipeline](docs/Integration.md)
+- [Pipeline Creation & Build Set-up](docs/createpipeline.md)
+- [Configuring the infrastructure & setting up Build & Run Unit Test stage](docs/createbuild.md)
+- [Build & Push Image to Docker](docs/dockerpush.md)
+- [Create Integration Stage and Run the Pipeline](docs/integration.md)
 
 ## Code of Conduct
 

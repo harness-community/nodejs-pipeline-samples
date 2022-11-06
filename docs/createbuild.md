@@ -74,4 +74,4 @@ Next Step(Execution)
 
 Next we are going to create Image and Push the image to docker registry 
 
-Click on **[Create Image and Push to Docker Registry](DockerPush.md)**
+Click on **[Create Image and Push to Docker Registry](dockerpush.md)**

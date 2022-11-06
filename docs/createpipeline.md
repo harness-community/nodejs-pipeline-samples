@@ -9,11 +9,15 @@ In this tutorial you will learn how you can seamlessly get started with Harness 
 ``` Name: (Default Project Name) ```
 ``` Organization: Default ```
 
+<img src="https://github.com/codewdhruv/nodejs-pipeline-samples/blob/patch-12/readme-images/about_project.png" width="580">
+
 - Select CI Module in the modules sections
 
 ### Step 2: Pipeline Creation & Configure Stages
 
 - Click on ```Pipelines``` -> Create a ```Pipeline```
+
+<img src="https://github.com/harness-community/nodejs-pipeline-samples/blob/main/readme-images/create_pipeline.png" width="580">
 
 - Configure the pipeline as below
 
@@ -23,4 +27,4 @@ In this tutorial you will learn how you can seamlessly get started with Harness 
 
 To know more about Pipelines [check out the docs here](https://github.com/harness-community/nodejs-pipeline-samples/docs) Next, we are going to add Stages and steps to our Pipeline and build our Nodejs sample server.
 
-**[Click Here to move to the next step (Build step)](build.md)**
+**[Click Here to move to the next step (Build step)](createbuild.md)**

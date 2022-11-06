@@ -1,7 +1,8 @@
 # Nodejs Sample Pipelines in Harness
+![Harness-BG-Image](https://raw.githubusercontent.com/harness-community/cd-pipeline-sample/main/Images/harness_cover_image.png)
 
 Introduction
-========================
+============
 This repository is a home for snippets of YAML code and a sample hello world server of scripting for the Harness CI Community.
 
 ## Layout

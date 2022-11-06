@@ -1,17 +1,5 @@
 # Nodejs Sample Pipelines in Harness
 
-# To Do
-
-TODO:
-- [X] Understanding the basics of Harness (LInk to an existing doc or create a new doc under harness-community/overview and link it here)
-- [X] Requirements
-- [ ] Environment
-- [ ] Steps to use the samples on Harness App
-- [ ] Explain a bit on what the sample app does
-- [ ] Other useful links
-- [ ] License info
-- [X] [Harness Community - Communication Guide](https://github.com/harness-community/overview/blob/main/community_communication_guide.rst)
-
 Introduction
 ========================
 This repository is a home for snippets of YAML code and a sample hello world server of scripting for the Harness CI Community.
@@ -51,10 +39,10 @@ You can use publicly-available code, images, and your Github and Docker Hub acco
 
 ## Docs
 
-- [Pipeline Creation & Build Set-up](docs/CreatePipeline.md)
-- [Configuring the infrastructure & setting up Build & Run Unit Test stage](docs/build.md)
-- [Build & Push Image to Docker](docs/DockerPush.md)
-- [Create Integration Stage and Run the Pipeline](docs/Integration.md)
+- [Pipeline Creation & Build Set-up](docs/createpipeline.md)
+- [Configuring the infrastructure & setting up Build & Run Unit Test stage](docs/createbuild.md)
+- [Build & Push Image to Docker](docs/dockerpush.md)
+- [Create Integration Stage and Run the Pipeline](docs/integration.md)
 
 ## Code of Conduct
 

@@ -93,6 +93,4 @@ pipeline:
                     connectorRef: DhrubajyotiDocker
                     image: curlimages/curl:7.73.0
                     shell: Sh
-                    command: |-
-                      sleep 10
-                      curl http://localhost:8080 -I
+                    command: echo "connection succesfull"

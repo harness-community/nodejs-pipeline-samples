@@ -79,6 +79,8 @@ pipeline:
                   name: nodejs server
                   identifier: nodejs_server
                   spec:
+                    connectorRef: <+input>
+                    image: <+input>
                     shell: Sh
                     command: |-
                       cd /nodejs-pipeline-samples

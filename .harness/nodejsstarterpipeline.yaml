@@ -85,3 +85,15 @@ pipeline:
                     command: |-
                       cd /nodejs-pipeline-samples
                       node index.js
+              - step:
+                  type: Run
+                  name: test connection to server
+                  identifier: test_connection_to_server
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: curlimages/curl:7.73.0
+                    shell: Sh
+                    command: |-
+                      sleep 10
+                      curl --request GET \
+                          --url http://localhost:8080

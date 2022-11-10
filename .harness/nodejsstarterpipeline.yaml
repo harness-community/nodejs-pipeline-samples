@@ -59,3 +59,27 @@ pipeline:
                     repo: <+input>
                     tags:
                       - latest
+    - stage:
+        name: integration test
+        identifier: integration_test
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Background
+                  name: nodejs server
+                  identifier: nodejs_server
+                  spec:
+                    shell: Sh
+                    command: |-
+                      cd /nodejs-pipeline-samples
+                      node index.js

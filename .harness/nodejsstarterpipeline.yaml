@@ -95,4 +95,5 @@ pipeline:
                     shell: Sh
                     command: |-
                       sleep 10
-                      curl http://localhost:8080
+                      curl --request GET \
+                          --url http://localhost:8080

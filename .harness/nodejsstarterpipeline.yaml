@@ -1,0 +1,61 @@
+pipeline:
+  name: nodejs-starter-pipeline
+  identifier: nodejsstarterpipeline
+  projectIdentifier: DhrubaCI
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: dhrubaaccountconnector
+        repoName: nodejs-pipeline-samples
+        build: <+input>
+  stages:
+    - stage:
+        name: build test and run
+        identifier: build_test_and_run
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: install node modules
+                  identifier: install_node_modules
+                  spec:
+                    shell: Sh
+                    command: npm install
+              - step:
+                  type: Run
+                  name: create image
+                  identifier: create_image
+                  spec:
+                    shell: Sh
+                    command: |-
+                      touch nodejsdockerfile
+                      cat > nodejsdockerfile <<- EOM
+                      FROM node:14
+                      WORKDIR /nodejshelloworld
+                      COPY package*.json index.js ./
+                      RUN npm install
+                      EXPOSE 8080
+                      CMD ["node", "index.js"]
+                      EOM
+                      cat nodejsdockerfile
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: build and push image to docker
+                  identifier: build_and_push_image_to_docker
+                  spec:
+                    connectorRef: <+input>
+                    repo: <+input>
+                    tags:
+                      - latest

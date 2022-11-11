@@ -20,8 +20,8 @@ inputSet:
                 identifier: "build_and_push_image_to_docker"
                 type: "BuildAndPushDockerRegistry"
                 spec:
-                  connectorRef: "DhrubajyotiDocker"
-                  repo: "dhrubajyotichakraborty/nodejshelloworld"
+                  connectorRef: Docker-Connector
+                  repo: registry-username/nodejs-pipeline-samples
     - stage:
         identifier: "integration_test"
         type: "CI"
@@ -32,8 +32,8 @@ inputSet:
                 identifier: "nodejs_server"
                 type: "Background"
                 spec:
-                  connectorRef: "DhrubajyotiDocker"
-                  image: "dhrubajyotichakraborty/nodejshelloworld"
+                  connectorRef: Docker Connector
+                  image: registry-username/nodejs-pipeline-samples
   name: "inputset"
   orgIdentifier: "default"
-  projectIdentifier: "DhrubaCI"
+  projectIdentifier: UNIQUE PROJECT IDENTIFIER

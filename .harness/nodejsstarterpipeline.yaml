@@ -1,13 +1,9 @@
-pipeline:
-  name: nodejs-starter-pipeline
-  identifier: nodejsstarterpipeline
-  projectIdentifier: DhrubaCI
-  orgIdentifier: default
+
   tags: {}
   properties:
     ci:
       codebase:
-        connectorRef: dhrubaaccountconnector
+        connectorRef: <+input>
         repoName: nodejs-pipeline-samples
         build: <+input>
   stages:
@@ -90,7 +86,7 @@ pipeline:
                   name: test connection to server
                   identifier: test_connection_to_server
                   spec:
-                    connectorRef: DhrubajyotiDocker
+                    connectorRef: <+input>
                     image: curlimages/curl:7.73.0
                     shell: Sh
                     command: echo "connection succesfull"

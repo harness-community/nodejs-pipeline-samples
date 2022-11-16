@@ -1,0 +1,39 @@
+inputSet:
+  identifier: "inputset"
+  pipeline:
+    identifier: "nodejsstarterpipeline"
+    properties:
+      ci:
+        codebase:
+          build:
+            type: "branch"
+            spec:
+              branch: "main"
+    stages:
+    - stage:
+        identifier: "build_test_and_run"
+        type: "CI"
+        spec:
+          execution:
+            steps:
+            - step:
+                identifier: "build_and_push_image_to_docker"
+                type: "BuildAndPushDockerRegistry"
+                spec:
+                  connectorRef: Docker-Connector
+                  repo: registry-username/nodejs-pipeline-samples
+    - stage:
+        identifier: "integration_test"
+        type: "CI"
+        spec:
+          execution:
+            steps:
+            - step:
+                identifier: "nodejs_server"
+                type: "Background"
+                spec:
+                  connectorRef: Docker Connector
+                  image: registry-username/nodejs-pipeline-samples
+  name: "inputset"
+  orgIdentifier: "default"
+  projectIdentifier: UNIQUE PROJECT IDENTIFIER

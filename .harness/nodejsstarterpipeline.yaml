@@ -3,8 +3,7 @@
   properties:
     ci:
       codebase:
-        connectorRef: <+input>
-        repoName: nodejs-pipeline-samples
+        connectorRef: nodejshelloworld
         build: <+input>
   stages:
     - stage:
@@ -14,12 +13,6 @@
         type: CI
         spec:
           cloneCodebase: true
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
           execution:
             steps:
               - step:
@@ -48,26 +41,28 @@
                       cat nodejsdockerfile
               - step:
                   type: BuildAndPushDockerRegistry
-                  name: build and push image to docker
-                  identifier: build_and_push_image_to_docker
+                  name: build and push an image to docker
+                  identifier: build_and_push_an_image_to_docker
                   spec:
                     connectorRef: <+input>
                     repo: <+input>
                     tags:
                       - latest
-    - stage:
-        name: integration test
-        identifier: integration_test
-        description: ""
-        type: CI
-        spec:
-          cloneCodebase: true
+                    dockerfile: Dockerfile
           platform:
             os: Linux
             arch: Amd64
           runtime:
             type: Cloud
             spec: {}
+    - stage:
+        name: integration test
+        identifier: integration_test
+        type: CI
+        spec:
+          cloneCodebase: false
+          infrastructure:
+            useFromStage: build_test_and_run
           execution:
             steps:
               - step:
@@ -79,14 +74,16 @@
                     image: <+input>
                     shell: Sh
                     command: |-
-                      cd /nodejs-pipeline-samples
+                      cd /nodejshelloworld
                       node index.js
               - step:
                   type: Run
                   name: test connection to server
                   identifier: test_connection_to_server
                   spec:
-                    connectorRef: <+input>
+                    connectorRef: account.harnessImage
                     image: curlimages/curl:7.73.0
                     shell: Sh
-                    command: echo "connection succesfull"
+                    command: |-
+                      sleep 10
+                      curl nodejs_server:8080
